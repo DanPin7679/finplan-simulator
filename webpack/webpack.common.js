@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
+const deps = require("../package.json").dependencies;
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
   resolve: {
@@ -36,6 +38,25 @@ module.exports = {
     filename: "main.js",
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: "simulator",
+      filename: "remoteEntry.js",
+      remotes: {},
+      exposes: {
+        "./Simulator": "./src/dataGathering/DataGathering",
+      },
+      shared: {
+        ...deps,
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "./src/index.html"),
     }),

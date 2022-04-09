@@ -17,6 +17,7 @@ export const lightTheme = createTheme({
 
 export const darkTheme = createTheme({
   palette: {
+    mode: "dark",
     primary: {
       // Purple and green play nicely together.
       main: blue[500],

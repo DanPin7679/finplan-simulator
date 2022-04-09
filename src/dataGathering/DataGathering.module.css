@@ -1,0 +1,30 @@
+.cardTitle {
+  grid-area: cardTitle;
+}
+.backArrow {
+  grid-area: backArrow;
+}
+.forwardArrow {
+  grid-area: forwardArrow;
+}
+.cardContent {
+  grid-area: cardContent;
+}
+
+.cardContainer {
+  display: grid;
+  height: 100%;
+  grid-template-areas:
+    "cardTitle cardTitle cardTitle"
+    "backArrow cardContent forwardArrow";
+  gap: 10px;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-rows: 50px auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.cardContainer > div {
+  text-align: center;
+}
